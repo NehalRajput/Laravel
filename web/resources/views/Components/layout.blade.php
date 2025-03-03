@@ -12,8 +12,7 @@
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
     </nav>
-
-    {{-- Use Blade syntax for slot --}}
+    
     {{ $slot }}
 
 </body>
