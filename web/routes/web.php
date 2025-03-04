@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
 Route::get('/', function () {
-    return view('home');
+  
+   //$jobs = Job::all();
+   //dd($jobs[1]->title);
+     return view('home');
 });
 
 Route::get('/jobs', function () {
