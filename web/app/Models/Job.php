@@ -16,6 +16,13 @@ class Job extends Model{
 
     protected $fillable = ['title', 'salary'];
 
+    public function employer()
+    {
+        //this reltionship types called has many employer belings to many job
+        return $this->belongsTo(Employer::class);
+
+    }
+
 
 
 }
