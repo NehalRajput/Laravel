@@ -4,8 +4,20 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Jobs\TranslatedJob;
 use Illuminate\Support\Facades\Route;
+use App\Models\Job;
 
+
+Route::get('test',function()
+{
+
+    $job = Job::first();
+
+    TranslatedJob::dispatch($job);
+    return 'done';
+
+});
 
 Route::view('/', 'home');
 Route::view('/contact', 'contact');
