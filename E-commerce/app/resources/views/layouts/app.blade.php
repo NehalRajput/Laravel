@@ -29,8 +29,18 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @yield('content')
             </main>
         </div>
     </body>
 </html>
+
+<!-- Example usage in a view -->
+<!-- resources/views/dashboard.blade.php -->
+@extends('layouts.app')
+
+@section('content')
+    <h1>Welcome to your dashboard!</h1>
+@endsection
+
+<!-- This makes sure your content goes into the layout -->
