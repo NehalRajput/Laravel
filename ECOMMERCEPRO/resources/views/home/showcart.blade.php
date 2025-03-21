@@ -1,148 +1,171 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <!-- Basic -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- Mobile Metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <!-- Site Metas -->
-      <meta name="keywords" content="" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <link rel="shortcut icon" href="home/images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
-      <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
-      <!-- font awesome style -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
-      <!-- Custom styles for this template -->
-      <link href="home/css/style.css" rel="stylesheet" />
-      <!-- responsive style -->
-      <link href="home/css/responsive.css" rel="stylesheet" />
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    
+    <title>Shopping Cart</title>
 
-      <style type="text/css">
-       .center
-      {
-            
-        margin:auto;
-        width: 70%;
-        text-align: center;
-        padding: 30px;
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/bootstrap.css') }}" />
+    <!-- Font Awesome -->
+    <link href="{{ asset('home/css/font-awesome.min.css') }}" rel="stylesheet" />
+    <!-- Custom Styles -->
+    <link href="{{ asset('home/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('home/css/responsive.css') }}" rel="stylesheet" />
 
-      }
-      table,th,td{
-        border: 1px solid grey;
+    <style>
+        .cart-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-      }
-       .th_deg
-       {
-        
-          font-size: 30px;
-          padding: 5px;
-          background-color: skyblue;
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
+        .cart-table th, .cart-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
 
-       }
-       .img_deg
-       {
-          height: 200px;
-          width: 200px;
+        .cart-table th {
+            background-color: #f8f9fa;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
 
-       }
-       .total_deg
-       {
-          
-        font-size: 20px;
-        padding: 40px;
+        .cart-table img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-       }
-      </style>
-   </head>
-   <body>
-      <div class="hero_area">
-         <!-- header section strats -->
+        .cart-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .total-price {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .checkout-btn {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero_area">
+        <!-- Header -->
         @include('home.header')
-         <!-- end header section -->
-    
-         <!-- end slider section -->
-         @if(session()->has('message'))
 
-         <div class="alert alert-success">
+        <div class="cart-container">
+            <h2 class="text-center">Shopping Cart</h2>
 
-             <button type="button" class="close" data-dismiss="alert" aria-hidden ="true">x</button>
+            @if(session()->has('message'))
+                <div class="alert alert-success text-center">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ session()->get('message') }}
+                </div>
+            @endif
 
-             {{session()->get('message')}}   
-         </div>
-         
-         @endif
-    
-        <div class="center">
-            <table>
-                <tr>
-                    <th class="th_deg">Product title</th>
-                    <th class="th_deg">Product quantity</th>
-                    <th class="th_deg">Price</th>
-                    <th class="th_deg">Image</th>
-                    <th class="th_deg">Action</th>
-                </tr>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $totalprice = 0 ?>
 
-                 <?php $totalprice = 0 ?>
-
-                @foreach ($cart as $cart)
-                    
-             
-                <tr>
-                    <td>{{$cart->product_title}}</td>
-                    <td>{{$cart->quantity}}</td>
-                    <td>${{$cart->price}}</td>
-                    <td><img class="img_deg" src="/product/{{$cart->image}}" alt=""></td>
-                    <td><a class="btn btn-danger" onclick="return confirm('Are you sure to remove this product')"  href="{{url('/remove_cart/'.$cart->id)}}">Remove Product</a></td>
-
-                </tr>
-                <?php $totalprice = $totalprice + $cart->price ?>
-                @endforeach
+                    @foreach ($cart as $cartItem)
+                        <tr>
+                            <td>{{ $cartItem->product_title }}</td>
+                            <td>{{ $cartItem->quantity }}</td>
+                            <td>${{ $cartItem->price }}</td>
+                            <td><img src="{{ asset('product/' . $cartItem->image) }}" alt="Product Image"></td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this product?')" href="{{ url('/remove_cart/' . $cartItem->id) }}">Remove</a>
+                            </td>
+                        </tr>
+                        <?php $totalprice += $cartItem->price ?>
+                    @endforeach
+                </tbody>
             </table>
-            <div>
-                <h1 class="total_deg">Total Price : ${{$totalprice}}</h1>
+
+            <div class="total-price">
+                <h4>Total Price: ${{ $totalprice }}</h4>
             </div>
-            
-            <div>
-                <h1 style="font-size: 25px; padding-bottom: 15px;">Proceed to Order</h1>
-                <a href="{{url('/cash_order')}}" class="btn btn-danger">Cash On Delivery</a>
-                <a href="" class="btn btn-danger">Pay Using Card</a>
+
+            <div class="checkout-btn">
+                <a href="{{ url('/cash_order') }}" class="btn btn-danger">Cash On Delivery</a>
+                <a href="{{ url('/stripe', $totalprice) }}" class="btn btn-primary">Pay Using Card</a>
             </div>
         </div>
 
-      <!-- why section -->
+        <!-- Footer -->
+        @include('home.footer')
+    </div>
 
-      <!-- end arrival section -->
-      
-      <!-- product section -->
-      
-      <!-- end product section -->
-
-      <!-- end client section -->
-      <!-- footer start -->
-   
-      <!-- footer end -->
-      <div class="cpy_">
-         <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
-         
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         
-         </p>
-      </div>
-   
-
-      <!-- jQery -->
-      <script src="home/js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
-      <script src="home/js/popper.min.js"></script>
-      <!-- bootstrap js -->
-      <script src="home/js/bootstrap.js"></script>
-      <!-- custom js -->
-      <script src="home/js/custom.js"></script>
-      
-   </body>
+    <!-- jQuery -->
+    <script src="{{ asset('home/js/jquery-3.4.1.min.js') }}"></script>
+    <!-- Popper JS -->
+    <script src="{{ asset('home/js/popper.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('home/js/bootstrap.js') }}"></script>
+    <!-- Custom JS -->
+    <script src="{{ asset('home/js/custom.js') }}"></script>
+</body>
 </html>

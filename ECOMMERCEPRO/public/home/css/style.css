@@ -9,12 +9,13 @@
 * {
   box-sizing: border-box;
 }
-body {
+body{
   font-family: 'Montserrat', sans-serif;
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
 }
+
 
 .layout_padding {
   padding: 70px 0;

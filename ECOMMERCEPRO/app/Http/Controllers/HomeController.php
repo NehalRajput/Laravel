@@ -8,7 +8,9 @@ use App\Services\CartService;
 use  App\models\Cart;
 use App\Models\Product;
 use App\Models\Order;
+
 use Exception;
+
 
 class HomeController extends Controller
 {
@@ -27,7 +29,16 @@ class HomeController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
-    
+    public function product_details($id)
+{
+    try {
+        $product = Product::findOrFail($id); // Find the product by ID
+        return view('home.product_details', compact('product')); // Pass data to view
+    } catch (Exception $e) {
+        return redirect()->back()->with('error', 'Product not found.');
+    }
+}
+
     public function add_cart(Request $request, $id)
     {
         return $this->cartService->addToCart($request, $id);
@@ -79,9 +90,24 @@ class HomeController extends Controller
         }
 
         return redirect()->back()->with('message', 'We have received your order. We will connect with you soon.');
-    } catch (Exception $e) {
+    } 
+    catch (Exception $e) {
         return redirect()->back()->with('error', 'Failed to place order.');
     }
 }
+   public function stripe($totalprice)
+{
+
+      return view('home.stripe',compact('totalprice'));
+}
+
+
+
+
+
+
+
+
 
 }
+

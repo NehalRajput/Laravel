@@ -18,8 +18,10 @@
       <link href="home/css/font-awesome.min.css" rel="stylesheet" />
       <!-- Custom styles for this template -->
       <link href="home/css/style.css" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
+      
    </head>
    <body>
       <div class="hero_area">
