@@ -23,7 +23,13 @@
         }
         label{
             display: inline-block;
-            
+            width: 200px;
+
+        }
+        .div_design
+        {
+            padding-bottom: 15px;
+
         }
     </style>
 </head>
@@ -40,60 +46,78 @@
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
-                <div class="div_center">
+               
+                    @if(session()->has('message'))
+
+                    <div class="alert alert-success">
+    
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden ="true">x</button>
+    
+                        {{session()->get('message')}}   
+                    </div>
+    
+    
+                    @endif
+                    <div class="div_center">
                     <h1 class="font_size">Add Product</h1>
 
-                    <div>
-                        <label>Product Title</label>
-                        <input class="text_color" type="text" name="title" placeholder="write a title">
+                    <form action="{{url('admin/add_product')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                    </div>
+                
+                   
 
-                    <div>
+                    <div class="div_design">
                         <label>Product Title :</label>
-                        <input class="text_color" type="text" name="title" placeholder="write a title">
+                        <input class="text_color" type="text" name="title" placeholder="write a title" required="">
 
                     </div>
-                    <div>
+                    <div class="div_design">
                         <label>Product Description :</label>
-                        <input class="text_color" type="text" name="Description" placeholder="write a Description>
+                        <input class="text_color" type="text" name="Description" placeholder="write a Description" required="">
 
                     </div>
-                    <div>
+                    <div class ="div_design">
                         <label>Product Price :</label>
-                        <input class="text_color" type="number" name="price" placeholder="write a price">
+                        <input class="text_color" type="number" name="price" placeholder="write a price" required="">
 
                     </div>
-                    <div>
+                    <div class="div_design">
                         <label>Discount Price</label>
                         <input class="text_color" type="number" name="dis_price" placeholder="write a Discount is apply">
 
                     </div>
-                    <div>
+                    <div class="div_design">
                         <label>Product Quantity :</label>
-                        <input class="text_color" type="number" min="0" name="quantity" placeholder="write a quantity">
+                        <input class="text_color" type="number" min="0" name="quantity" placeholder="write a quantity" required="">
 
                     </div>
                    
-                    <div>
+                    <div class="div_design">
                         <label>Product Category :</label>
-                          <select class="text_color" name="category">
-                            <option>shirt</option>
+                          <select class="text_color" name="category" required="">
+                            <option value="" selected="">Add a category here</option>
+
+                            @foreach ($category as $category)
+                            
+                            <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                            @endforeach
                           </select>
                     </div>
 
-                    <div>
+                    <div class="div_design">
                         <label>Product Image Here:</label>
-                      <input type="file" name="image">
+                      <input type="file" name="image" required="">
                     </div>
   
 
-                    <div>
-                        <input type="submit">
+                    <div class="div_design">
+                        <input type="submit" value="Add Product" class="btn btn-primary">
                     </div>
                 
-
+                </form>
                 </div>
+          
             </div>
         </div>
         <!-- main-panel ends -->

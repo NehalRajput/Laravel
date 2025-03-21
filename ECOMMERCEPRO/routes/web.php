@@ -17,12 +17,34 @@ Route::middleware([
     })->name('dashboard');
 });
 
+  
+Route::prefix('admin')->group(function () {
+Route::get('/redirect', [HomeController::class, 'redirect']);
+Route::get('/view_category', [AdminController ::class, 'view_category']);
 
-route::get('/redirect',[HomeController ::class, 'redirect']);
-route::get('/view_category', [AdminController ::class, 'view_category']);
+
+Route::POST('/add_category', [AdminController ::class, 'add_category']);
+Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])->name('delete_category');
+Route::get('/view_product', [AdminController ::class, 'view_product']);
+Route::post('/add_product', [AdminController ::class, 'add_product']);
+
+Route::get('/show_product', [AdminController ::class, 'show_product']);
+Route::get('/delete_product/{id}', [AdminController ::class, 'delete_product']);
+Route::get('/update_product/{id}', [AdminController::class, 'update_product']);
+
+//now we are doing the update part
+Route::post('/update_product_confirm/{id}', [AdminController::class, 'update_product_confirm']);
 
 
-route::POST('/add_category', [AdminController ::class, 'add_category']);
-route::get('/delete_category/{id}', [AdminController ::class, 'delete_category']);
 
-route::get('/view_product', [AdminController ::class, 'view_product']);
+});
+
+Route::get('/product_details/{id}', [HomeController ::class, 'product_details']);
+Route::Post('/add_cart/{id}', [HomeController ::class, 'add_cart']);
+
+Route::get('/show_cart', [HomeController ::class, 'show_cart']);
+
+Route::get('/remove_cart/{id}', [HomeController ::class, 'remove_cart']);
+
+Route::get('/cash_order', [HomeController ::class, 'cash_order']);
+
