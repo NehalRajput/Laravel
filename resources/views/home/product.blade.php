@@ -13,23 +13,19 @@
                         <div class="option_container">
                             <div class="options">
                                 <a href="{{url('/product-details',$products->id)}}" class="option1">
-                                  Product Details
+                                    <i class="fa fa-eye"></i> View Details
                                 </a>
-                              
+                                
                                 <form action="{{url('/add-cart',$products->id)}}" method="Post">
-
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <input type="number" name="quantity" value="1" min="1" style="width: 100px">
+                                        <div class="col-md-12">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="add-to-cart-btn w-100">
+                                                <i class="fa fa-shopping-cart"></i> Add to Cart
+                                            </button>
                                         </div>
-
-                                   <div class="col-md-4">
-                                    <input type="submit" value="Add to Cart">
-                                   </div>
-                                  
-                                   
-                                </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

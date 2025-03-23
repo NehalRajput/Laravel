@@ -1,0 +1,128 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.header_section {
+    background: #ffffff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand.site-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.navbar-brand .highlight {
+    color: #ff4c68;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.nav-link {
+    color: #555 !important;
+    font-weight: 500;
+    padding: 15px 20px !important;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+.nav-link:hover {
+    color: #ff4c68 !important;
+}
+
+.cart-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-link i {
+    font-size: 20px;
+}
+
+.search-form {
+    margin: 0 15px;
+}
+
+.search-form .form-control {
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #ddd;
+}
+
+.search-btn {
+    background: #ff4c68;
+    color: white;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    padding: 8px 15px;
+}
+
+.btn-login, .btn-register {
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-login {
+    background: transparent;
+    border: 2px solid #ff4c68;
+    color: #ff4c68;
+    margin-right: 10px;
+}
+
+.btn-register {
+    background: #ff4c68;
+    border: 2px solid #ff4c68;
+    color: white;
+}
+
+.btn-login:hover {
+    background: #ff4c68;
+    color: white;
+}
+
+.btn-register:hover {
+    background: #ff3554;
+    border-color: #ff3554;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.dropdown-menu li a {
+    padding: 8px 20px;
+    color: #555;
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+    background: #fff5f6;
+    color: #ff4c68;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        padding: 20px 0;
+    }
+    
+    .search-form {
+        margin: 15px 0;
+    }
+    
+    .btn-login, .btn-register {
+        margin: 5px 0;
+        display: block;
+        text-align: center;
+    }
+}

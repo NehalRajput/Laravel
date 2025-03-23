@@ -21,7 +21,8 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
-      
+      <!-- Add this line in the head section -->
+      <link rel="stylesheet" href="{{ asset('home/css/custom-header.css') }}">
    </head>
    <body>
       <div class="hero_area">

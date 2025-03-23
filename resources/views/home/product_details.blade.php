@@ -21,42 +21,48 @@
         <!-- Header Section -->
         @include('home.header')
 
-        <div class="container" style="padding: 50px 0;">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card shadow-lg p-4">
-                        <div class="text-center">
-                            <img src="{{ asset('product/' . $product->image) }}" 
-                                 alt="Product Image" 
-                                 style="width: 300px; height: 300px; object-fit: cover; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
-                        </div>
-                        <div class="card-body text-center">
-                            <h3 class="mb-3">{{ $product->title }}</h3>
+        <div class="product-details-container">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="product-details-card">
+                            <div class="product-details-image">
+                                <img src="{{ asset('product/' . $product->image) }}" alt="{{ $product->title }}">
+                            </div>
+                            <div class="product-details-content">
+                                <h1 class="product-title-large">{{ $product->title }}</h1>
 
-                            @if ($product->discount_price != null)
-                                <h4 class="text-danger">
-                                    Discount Price: ${{ $product->discount_price }}
-                                </h4>
-                                <h5 style="text-decoration: line-through; color:rgb(104, 68, 68)">
-                                    Original Price: ${{ $product->price }}
-                                </h5>
-                            @else
-                                <h4 style="color: rgb(104, 68, 68)">
-                                    Price: ${{ $product->price }}
-                                </h4>
-                            @endif
+                                @if ($product->discount_price != null)
+                                    <div class="price-tag">
+                                        Discount Price: ${{ $product->discount_price }}
+                                    </div>
+                                    <span class="original-price-tag">
+                                        Original Price: ${{ $product->price }}
+                                    </span>
+                                @else
+                                    <div class="price-tag">
+                                        Price: ${{ $product->price }}
+                                    </div>
+                                @endif
 
-                            <p><strong>Category:</strong> {{ $product->category }}</p>
-                            <p><strong>Description:</strong> {{ $product->description }}</p>
-                            <p><strong>Available Quantity:</strong> {{ $product->quantity }}</p>
-
-                            <form action="{{ url('/add-cart', $product->id) }}" method="POST">
-                                @csrf
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <input type="number" name="quantity" value="1" min="1" class="form-control w-25">
-                                    <input type="submit" value="Add to Cart" class="btn btn-primary ml-2">
+                                <div class="product-info">
+                                    <p><strong>Category:</strong> {{ $product->category }}</p>
+                                    <p><strong>Description:</strong> {{ $product->description }}</p>
+                                    <p><strong>Available Quantity:</strong> {{ $product->quantity }}</p>
                                 </div>
-                            </form>
+
+                                <form action="{{ url('/add-cart', $product->id) }}" method="POST">
+                                    @csrf
+                                    <div class="quantity-section">
+                                        <label for="quantity" class="form-label">Quantity:</label>
+                                        <input type="number" id="quantity" name="quantity" value="1" min="1" 
+                                               class="form-control quantity-input">
+                                        <button type="submit" class="add-to-cart-button">
+                                            <i class="fa fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
