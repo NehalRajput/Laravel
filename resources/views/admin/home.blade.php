@@ -1,27 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-  @include('admin.css')
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-     
-       @include('admin.sidebar')
-      <!-- partial -->
-    
-        <!-- partial:partials/_navbar.html -->
-       @include('admin.header')
-        <!-- partial -->
-       @include('admin.body')
-        <!-- main-panel ends -->
-   
-        
-      <!-- page-body-wrapper ends -->
-    
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    @include('admin.script')
-  </body>
-</html>
+@extends('admin.layouts.app')
+
+@section('content')
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <p class="card-text display-4">{{ $total_product }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Orders</h5>
+                <p class="card-text display-4">{{ $total_order }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <p class="card-text display-4">{{ $total_user }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Revenue</h5>
+                <p class="card-text display-4">${{ $total_revenue }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Order Status</h5>
+                <p>Processing: {{ $total_processing }}</p>
+                <p>Delivered: {{ $total_delivered }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

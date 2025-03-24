@@ -51,17 +51,29 @@
                                     <p><strong>Available Quantity:</strong> {{ $product->quantity }}</p>
                                 </div>
 
-                                <form action="{{ url('/add-cart', $product->id) }}" method="POST">
-                                    @csrf
-                                    <div class="quantity-section">
-                                        <label for="quantity" class="form-label">Quantity:</label>
-                                        <input type="number" id="quantity" name="quantity" value="1" min="1" 
-                                               class="form-control quantity-input">
-                                        <button type="submit" class="add-to-cart-button">
-                                            <i class="fa fa-shopping-cart"></i> Add to Cart
-                                        </button>
-                                    </div>
-                                </form>
+                                <div class="quantity-section">
+                                    @auth
+                                        <form action="{{ url('/add-cart', $product->id) }}" method="POST">
+                                            @csrf
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="quantity-wrapper">
+                                                    <label for="quantity" class="form-label">Quantity:</label>
+                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" 
+                                                           class="form-control quantity-input">
+                                                </div>
+                                                <button type="submit" class="add-to-cart-button">
+                                                    <i class="fa fa-shopping-cart"></i> Add to Cart
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @else
+                                        <div class="login-prompt">
+                                            <a href="{{ route('login') }}" class="btn btn-login">
+                                                <i class="fa fa-sign-in"></i> Login to Purchase
+                                            </a>
+                                        </div>
+                                    @endauth
+                                </div>
                             </div>
                         </div>
                     </div>

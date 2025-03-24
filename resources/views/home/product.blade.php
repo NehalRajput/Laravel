@@ -12,11 +12,11 @@
                     <div class="box">
                         <div class="option_container">
                             <div class="options">
-                                <a href="{{url('/product-details',$products->id)}}" class="option1">
+                                <a href="{{ route('product.details', $product->slug) }}" class="option1">
                                     <i class="fa fa-eye"></i> View Details
                                 </a>
                                 
-                                <form action="{{url('/add-cart',$products->id)}}" method="Post">
+                                <form action="{{ route('cart.add', $product->slug) }}" method="Post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
