@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/product-details/{id}', [HomeController::class, 'product_details']);
+Route::get('/product-details/{id}', [HomeController::class, 'product_details'])->name('product.details');
 
 // Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
@@ -14,7 +14,7 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::post('/add-cart/{id}', [HomeController::class, 'add_cart']);
+    Route::post('/add-cart/{id}', [HomeController::class, 'add_cart'])->name('cart.add');
     Route::get('/show-cart', [HomeController::class, 'show_cart']);
     Route::get('/remove-cart/{id}', [HomeController::class, 'remove_cart']);
     Route::get('/cash-order', [HomeController::class, 'cash_order']);
@@ -30,9 +30,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/redirect', [HomeController::class, 'redirect']);
 
     // Category Management
-    Route::get('/category', [AdminController::class, 'view_category'])->name('admin.categories');
+    //Route::get('/category', [AdminController::class, 'view_category'])->name('admin.categories');
+   Route::get('/view-category', [AdminController::class, 'view_category']);
+
     Route::post('/add-category', [AdminController::class, 'add_category']);
-    Route::get('/delete-category/{id}', [AdminController::class, 'delete_category']);
+
+    Route::get('/delete-category/{id}', [AdminController::class, 'delete_category'])->name('admin.delete-category');
 
     // Product Management
     Route::get('/view-product', [AdminController::class, 'view_product'])->name('admin.products');

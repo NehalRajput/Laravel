@@ -28,6 +28,7 @@ class HomeController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
+    
     public function product_details($id)
 {
     try {

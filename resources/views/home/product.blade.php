@@ -1,4 +1,3 @@
-
 <section class="product_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
@@ -8,16 +7,16 @@
         </div>
         <div class="row">
 
-            @foreach ($product as $products)
+            @foreach ($product as $item)
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="box">
                         <div class="option_container">
                             <div class="options">
-                                <a href="{{ route('product.details', $product->slug) }}" class="option1">
+                                <a href="{{ route('product.details', $item->id) }}" class="option1">
                                     <i class="fa fa-eye"></i> View Details
                                 </a>
                                 
-                                <form action="{{ route('cart.add', $product->slug) }}" method="Post">
+                                <form action="{{ route('cart.add', $item->id) }}" method="Post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -31,32 +30,28 @@
                             </div>
                         </div>
                         <div class="img-box">
-                            <img src="product/{{ $products->image }}" alt="">
+                            <img src="product/{{ $item->image }}" alt="">
                         </div>
                         <div class="detail-box">
                             <h5>
-                                {{ $products->title }}
+                                {{ $item->title }}
                             </h5>
-                            @if ($products->discount_price != null)
+                            @if ($item->discount_price != null)
                                 <h6 style="color: red;">
                                     Discount Price
-
                                     <br>
-                                    ${{ $products->discount_price }}
+                                    ${{ $item->discount_price }}
                                 </h6>
-
                                 <h6 style="text-decoration: line-through; color:rgb(104, 68, 68)">
                                     Price
                                     <br>
-
-                                    ${{ $products->price }}
-
+                                    ${{ $item->price }}
                                 </h6>
                             @else
                                 <h6 style="color: rgb(104, 68, 68)">
                                     Price
                                     <br>
-                                    ${{ $products->price }}
+                                    ${{ $item->price }}
                                 </h6>
                             @endif
                         </div>
@@ -66,10 +61,7 @@
 
             <span style="padding-top:20px">
                 {!! $product->withQueryString()->links('pagination::bootstrap-5') !!}
-
             </span>
 
         </div>
-
-
 </section>

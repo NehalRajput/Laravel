@@ -80,8 +80,8 @@
                     <tr>
                         <td>{{$data->category_name}}</td>
                         <td>
-                          <a onclick="return confirm('Are you sure you want to delete this record?')" class="btn btn-danger" href="{{route('delete_category',$data->id) }}">Delete</a>
-   
+                          <a onclick="return confirm('Are you sure you want to delete this record?')" class="btn btn-danger" href="{{ url('admin/delete-category/'.$data->id) }}">Delete</a>
+
                         </td>
                     </tr>
                     @endforeach
