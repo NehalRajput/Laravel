@@ -104,10 +104,10 @@ class HomeController extends Controller
 
 
 
-    public function adminpage()
+    public function redirect()
     {
         try {
-            dd("hello");
+          //  dd("hello");
             $usertype = Auth::user()->usertype;
 
             if ($usertype == '1') {
@@ -141,4 +141,3 @@ class HomeController extends Controller
         }
     }
 } // End of class
-
