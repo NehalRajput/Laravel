@@ -1,0 +1,14 @@
+.nav-item.menu-items .collapse {
+    position: relative;
+    left: 0;
+    z-index: 999;
+}
+
+.nav-item.menu-items .collapse .nav.sub-menu {
+    padding: 0.75rem 0;
+    background: #000;
+}
+
+.nav-item.menu-items .collapse.show {
+    display: block;
+}

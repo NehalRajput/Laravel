@@ -70,25 +70,25 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+        
         <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" href="{{ url('admin/view-product') }}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-laptop"></i>
+                    <i class="mdi mdi-file-document-box"></i>
                 </span>
-                <span class="menu-title">Products</span>
-                <i class="menu-arrow"></i>
+                <span class="menu-title">Add Product</span>
             </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('admin/view-product') }}">Add Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('admin/show-product') }}">Show Products</a>
-                    </li>
-                </ul>
-            </div>
         </li>
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('admin/show-product') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-view-list"></i>
+                </span>
+                <span class="menu-title">Show Products</span>
+            </a>
+        </li>
+        
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{ url('admin/view-category') }}">
                 <span class="menu-icon">
@@ -97,5 +97,13 @@
                 <span class="menu-title">Category</span>
             </a>
         </li>
-    </ul>
-  </nav>
+ 
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('static-blocks.create') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-file-document-box"></i>
+                </span>
+                <span class="menu-title">Static Blocks</span>
+            </a>
+        </li>
+</nav>

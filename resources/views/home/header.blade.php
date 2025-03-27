@@ -13,20 +13,29 @@
                         <a class="nav-link" href="{{url('/')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="{{url('/contact')}}">Contact</a>
                     </li>
                     
                     @auth
+                        @if(Auth::user()->usertype == '1')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/admin/redirect')}}">
+                                    <i class="fa fa-cog"></i> Backend
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="{{ url('show-cart') }}" class="nav-link cart-link">
                                 <i class="fa fa-shopping-cart"></i> Cart
                             </a>
                         </li>
                         <li class="nav-item">
-                            <x-app-layout></x-app-layout>
+                            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </button>
+                            </form>
                         </li>
                     @else
                         <li class="nav-item">

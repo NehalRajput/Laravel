@@ -72,3 +72,6 @@
       <script src="home/js/custom.js"></script>
    </body>
 </html>
+<footer>
+    @include('home.footer')
+</footer>

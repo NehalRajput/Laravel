@@ -137,7 +137,9 @@
                             <td>${{ $cartItem->price }}</td>
                             <td><img src="{{ asset('product/' . $cartItem->image) }}" alt="Product Image"></td>
                             <td>
-                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this product?')" href="{{ url('/remove_cart/' . $cartItem->id) }}">Remove</a>
+                                <a onclick="return confirm('Are you sure to remove this product?')" 
+                                   href="{{ route('cart.remove', $cartItem->id) }}" 
+                                   class="btn btn-danger">Remove Product</a>
                             </td>
                         </tr>
                         <?php $totalprice += $cartItem->price ?>
