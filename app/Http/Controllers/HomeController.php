@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Services\CartService;
+use App\Models\StaticBlock;
 use App\Models\Cart;
 use Exception;
 
@@ -23,11 +24,13 @@ class HomeController extends Controller
     {
         try {
             $product = Product::paginate(10);
-            return view('home.userpage', compact('product'));
+            $blocks = StaticBlock::where('status', true)->get();
+            return view('home.userpage', compact('product', 'blocks'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
+    
     public function product_details($id)
 {
     try {
@@ -40,7 +43,27 @@ class HomeController extends Controller
 
     public function add_cart(Request $request, $id)
     {
-        return $this->cartService->addToCart($request, $id);
+        try {
+            $result = $this->cartService->addToCart($request, $id);
+            
+            if($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Product added to cart successfully',
+                    'cart_count' => Cart::where('user_id', Auth::id())->count()
+                ]);
+            }
+            
+            return $result;
+        } catch (Exception $e) {
+            if($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to add product to cart'
+                ], 422);
+            }
+            return redirect()->back()->with('error', 'Failed to add to cart');
+        }
     }
 
     public function show_cart()
@@ -61,7 +84,13 @@ class HomeController extends Controller
 
     public function remove_cart($id)
     {
-        return $this->cartService->removeCartItem($id);
+        try {
+            $cart_item = Cart::findOrFail($id);
+            $cart_item->delete();
+            return redirect()->back()->with('message', 'Product removed from cart successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Failed to remove product from cart');
+        }
     }
     public function cash_order()
 {
@@ -104,41 +133,20 @@ class HomeController extends Controller
 
 
 
-    public function adminpage()
+    public function redirect()
     {
-        try {
-            dd("hello");
-            $usertype = Auth::user()->usertype;
-
-            if ($usertype == '1') {
-                $total_product = Product::all()->count();
-                $total_order = Order::all()->count();
-                $total_user = User::all()->count();
-                $order = Order::all();
-                $total_revenue = 0;
-
-                foreach($order as $order) {
-                    $total_revenue = $total_revenue + $order->price;
-                }
-
-                $total_delivered = Order::where('delivery_status', '=', 'delivered')->get()->count();
-                $total_processing = Order::where('delivery_status', '=', 'processing')->get()->count();
-
-                return view('admin.home', compact(
-                    'total_product',
-                    'total_order',
-                    'total_user',
-                    'total_revenue',
-                    'total_delivered',
-                    'total_processing'
-                ));
-            } else {
-                $product = Product::paginate(10);
-                return view('home.userpage', compact('product'));
-            }
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Access Denied');
+        if(Auth::user()->usertype == '1')
+        {
+            return view('admin.home');
+        }
+        else
+        {
+            return redirect('/');
         }
     }
+    public function products()
+    {
+        $products = Product::all();
+        return view('home.products', compact('products'));
+    }
 } // End of class
-

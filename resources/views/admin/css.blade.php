@@ -1,9 +1,11 @@
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Admin Panel</title>
 <!-- Plugins: CSS -->
 <link rel="stylesheet" href="{{ asset('AdminLinks/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
 <link rel="stylesheet" href="{{ asset('AdminLinks/assets/vendors/css/vendor.bundle.base.css') }}">
+<link rel="stylesheet" href="{{ asset('AdminLinks/assets/css/style.css') }}">
 <!-- Endinject -->
 <!-- Plugin CSS for this page -->
 <link rel="stylesheet" href="{{ asset('AdminLinks/assets/vendors/jvectormap/jquery-jvectormap.css') }}">
